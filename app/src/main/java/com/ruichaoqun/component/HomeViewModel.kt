@@ -1,13 +1,13 @@
 package com.ruichaoqun.component
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.ruichaoqun.component.data.HomeListBean
 import com.ruichaoqun.component.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  *
@@ -16,10 +16,10 @@ import javax.inject.Inject
  * @Description:    HomeViewModel
  * @Version:        1.0
  */
-class HomeViewModel @Inject constructor(private val repository:HomeRepository):ViewModel(){
+class HomeViewModel @ViewModelInject constructor(private val repository:HomeRepository):ViewModel(){
 
 
-    fun getHomeArticleList(): Flow<PagingData<HomeListBean.Data.Data>> {
+    fun getHomeArticleList(): Flow<PagingData<HomeListBean.HomeData.HomeListData>> {
         return repository.getHomeListArticleList().cachedIn(viewModelScope)
     }
 }

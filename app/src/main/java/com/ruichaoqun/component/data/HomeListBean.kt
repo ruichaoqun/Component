@@ -1,20 +1,20 @@
-package com.ruichaoqun.component
+package com.ruichaoqun.component.data
 
 data class HomeListBean(
-    var `data`: Data?,
+    var data: HomeData?,
     var errorCode: Int?,
     var errorMsg: String?
 ) {
-    data class Data(
+    data class HomeData(
         var curPage: Int?,
-        var datas: List<Data>?,
+        var datas: List<HomeListData>?,
         var offset: Int?,
         var over: Boolean?,
         var pageCount: Int?,
         var size: Int?,
         var total: Int?
     ) {
-        data class Data(
+        data class HomeListData(
             var apkLink: String?,
             var audit: Int?,
             var author: String?,

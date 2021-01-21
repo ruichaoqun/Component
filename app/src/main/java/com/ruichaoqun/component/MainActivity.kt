@@ -16,24 +16,33 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
-    val viewModel:HomeViewModel by viewModels()
-    @Inject lateinit var  adapter:HomeArticleAdapter
+    private val viewModel by viewModels<HomeViewModel>()
+    val adapter:HomeArticleAdapter = HomeArticleAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoadMoreAdapter{adapter.retry()},
+            footer = LoadMoreAdapter{adapter.retry()}
+        )
+        initView()
         initData()
     }
 
-    private fun initData() {
+    private fun initView() {
         lifecycleScope.launch {
             adapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
                 .collect{binding.recyclerView.scrollToPosition(0)}
+        }
+    }
+
+    private fun initData() {
+        lifecycleScope.launch {
             viewModel.getHomeArticleList()
                 .collect {
                     adapter.submitData(it)

@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.RecyclerView
+import com.ruichaoqun.component.data.HomeListBean
 import com.ruichaoqun.component.databinding.ItemAdapterHomeArticleBinding
 import javax.inject.Inject
 
@@ -17,18 +17,18 @@ import javax.inject.Inject
  * @Description:    HomeArticleAdapter
  * @Version:        1.0
  */
-class HomeArticleAdapter @Inject constructor(): PagingDataAdapter<HomeListBean.Data.Data, HomeArticleAdapter.ViewHolder>(diffCallback = object :
-    ItemCallback<HomeListBean.Data.Data>(){
+class HomeArticleAdapter @Inject constructor(): PagingDataAdapter<HomeListBean.HomeData.HomeListData, HomeArticleAdapter.ViewHolder>(diffCallback = object :
+    ItemCallback<HomeListBean.HomeData.HomeListData>(){
     override fun areItemsTheSame(
-        oldItem: HomeListBean.Data.Data,
-        newItem: HomeListBean.Data.Data
+        oldItem: HomeListBean.HomeData.HomeListData,
+        newItem: HomeListBean.HomeData.HomeListData
     ): Boolean {
         return oldItem == newItem
     }
 
     override fun areContentsTheSame(
-        oldItem: HomeListBean.Data.Data,
-        newItem: HomeListBean.Data.Data
+        oldItem: HomeListBean.HomeData.HomeListData,
+        newItem: HomeListBean.HomeData.HomeListData
     ): Boolean {
         return oldItem == newItem
     }

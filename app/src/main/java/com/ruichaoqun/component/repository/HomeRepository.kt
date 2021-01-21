@@ -3,11 +3,10 @@ package com.ruichaoqun.component.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.ruichaoqun.component.HomeListBean
+import com.ruichaoqun.component.data.HomeListBean
 import com.ruichaoqun.component.WanAndroidService
 import com.ruichaoqun.component.data.HomeListSource
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 /**
  *
@@ -16,8 +15,8 @@ import javax.inject.Inject
  * @Description:    HomeRepository
  * @Version:        1.0
  */
-class HomeRepository constructor(private val service:WanAndroidService) {
-    fun getHomeListArticleList():Flow<PagingData<HomeListBean.Data.Data>>{
+class HomeRepository(private val service:WanAndroidService) {
+    fun getHomeListArticleList():Flow<PagingData<HomeListBean.HomeData.HomeListData>>{
         return Pager(config = PagingConfig(
             pageSize = 20,
             enablePlaceholders = false
